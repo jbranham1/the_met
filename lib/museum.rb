@@ -42,18 +42,15 @@ class Museum
   end
 
   def draw_lottery_winner(exhibit)
-    string = get_names(exhibit)
-    if string.empty?
+    winner = ticket_lottery_contestants(exhibit).sample.name
+    if winner.empty?
       nil
     else
-      "#{string} can be returned here. Fun!"
+      winner
     end
   end
 
-  def get_names(exhibit)
-    names = ticket_lottery_contestants(exhibit).map do |patron|
-      patron.name
-    end.flatten
-    string = names.join(" or ")
+  def announce_lottery_winner(exhibit)
+    "#{draw_lottery_winner(exhibit)} has won the #{exhibit.name} exhibit lottery"
   end
 end
