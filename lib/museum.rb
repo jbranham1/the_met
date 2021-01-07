@@ -40,4 +40,20 @@ class Museum
       patron.spending_money < exhibit.cost
     end
   end
+
+  def draw_lottery_winner(exhibit)
+    string = get_names(exhibit)
+    if string.empty?
+      nil
+    else
+      "#{string} can be returned here. Fun!"
+    end
+  end
+
+  def get_names(exhibit)
+    names = ticket_lottery_contestants(exhibit).map do |patron|
+      patron.name
+    end.flatten
+    string = names.join(" or ")
+  end
 end
