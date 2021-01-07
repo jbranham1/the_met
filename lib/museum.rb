@@ -25,7 +25,13 @@ class Museum
 
   def patrons_by_exhibit_interest
     @exhibits.each_with_object({}) do |exhibit, hash|
-      hash[exhibit] = []
+      hash[exhibit] = get_patrons_by_exhibit(exhibit)
+    end
+  end
+
+  def get_patrons_by_exhibit(exhibit)
+    @patrons.select do |patron|
+      recommend_exhibits(patron).any?(exhibit)
     end
   end
 end
