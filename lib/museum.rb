@@ -18,5 +18,8 @@ class Museum
   end
 
   def patrons_by_exhibit_interest
+    @exhibits.each_with_object({}) do |exhibit, hash|
+      hash[exhibit] = []
+    end
   end
 end

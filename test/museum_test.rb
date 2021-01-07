@@ -42,7 +42,19 @@ class MuseumTest < Minitest::Test
   end
 
   def test_patrons_by_exhibit_interest
-    patrons_hash = {}
+    dead_sea_scrolls = mock
+    gems_and_minerals = mock
+    dead_sea_scrolls.stubs(:name).returns("Dead Sea Scrolls")
+    gems_and_minerals.stubs(:name).returns("Gems and Minerals")
+    @dmns.add_exhibit(@imax)
+    @dmns.add_exhibit(dead_sea_scrolls)
+    @dmns.add_exhibit(gems_and_minerals)
+
+    patrons_hash = {
+      dead_sea_scrolls => [],
+      gems_and_minerals => [],
+      @imax => []
+    }
     assert_equal patrons_hash, @dmns.patrons_by_exhibit_interest
   end
 end
