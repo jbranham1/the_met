@@ -42,11 +42,11 @@ class Museum
   end
 
   def draw_lottery_winner(exhibit)
-    winner = ticket_lottery_contestants(exhibit).sample.name
-    if winner.empty?
+    winner = ticket_lottery_contestants(exhibit).sample
+    if winner.nil?
       nil
     else
-      winner
+      winner.name
     end
   end
 

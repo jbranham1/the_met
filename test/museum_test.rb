@@ -53,7 +53,6 @@ class MuseumTest < Minitest::Test
     dmns.admit(patron_1)
 
     assert_equal [patron_1], dmns.patrons
-    assert_equal 0, patron_1.spending_money
   end
 
   def test_patrons_by_exhibit_interest
@@ -92,7 +91,6 @@ class MuseumTest < Minitest::Test
   end
 
   def test_draw_lottery_winner
-    skip
     dmns = Museum.new("Denver Museum of Nature and Science")
     gems_and_minerals = Exhibit.new({name: "Gems and Minerals", cost: 0})
     dead_sea_scrolls = Exhibit.new({name: "Dead Sea Scrolls", cost: 10})
@@ -107,10 +105,8 @@ class MuseumTest < Minitest::Test
     dmns.admit(patron_1)
     dmns.admit(patron_2)
     dmns.admit(patron_3)
-    test = mock
-    test.stubs(:exhibits).returns([dead_sea_scrolls, gems_and_minerals])
-    test.stubs(:draw_lottery_winner).returns("Sally")
-    assert_instance_of "Sally", test.draw_lottery_winner(dead_sea_scrolls)
+
+    assert_equal true, dmns.draw_lottery_winner(dead_sea_scrolls).is_a?(String)
     assert_nil dmns.draw_lottery_winner(gems_and_minerals)
   end
 
