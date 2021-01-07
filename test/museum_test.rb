@@ -41,6 +41,12 @@ class MuseumTest < Minitest::Test
     assert_equal recommended_exhibits, @dmns.recommend_exhibits(@patron)
   end
 
+  def test_admit
+    @dmns.admit(@patron)
+
+    assert_equal [@patron], dmns.patrons
+  end
+
   def test_patrons_by_exhibit_interest
     dead_sea_scrolls = mock
     gems_and_minerals = mock
@@ -57,4 +63,5 @@ class MuseumTest < Minitest::Test
     }
     assert_equal patrons_hash, @dmns.patrons_by_exhibit_interest
   end
+
 end
