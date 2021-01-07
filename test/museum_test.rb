@@ -68,4 +68,18 @@ class MuseumTest < Minitest::Test
     assert_equal patrons_hash, dmns.patrons_by_exhibit_interest
   end
 
+  def test_ticket_lottery_contestants
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    dead_sea_scrolls = Exhibit.new({name: "Dead Sea Scrolls", cost: 10})
+    dmns.add_exhibit(dead_sea_scrolls)
+    patron_1 = Patron.new("Bob", 20)
+    patron_1.add_interest("Dead Sea Scrolls")
+    patron_2 = Patron.new("Sally", 5)
+    patron_2.add_interest("Dead Sea Scrolls")
+    dmns.admit(patron_1)
+    dmns.admit(patron_2)
+
+    assert_equal [patron_2], dmns.ticket_lottery_contestants(dead_sea_scrolls)
+  end
+
 end
