@@ -44,7 +44,7 @@ class MuseumTest < Minitest::Test
   def test_admit
     @dmns.admit(@patron)
 
-    assert_equal [@patron], dmns.patrons
+    assert_equal [@patron], @dmns.patrons
   end
 
   def test_patrons_by_exhibit_interest
