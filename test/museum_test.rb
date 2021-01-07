@@ -40,4 +40,9 @@ class MuseumTest < Minitest::Test
 
     assert_equal recommended_exhibits, @dmns.recommend_exhibits(@patron)
   end
+
+  def test_patrons_by_exhibit_interest
+    patrons_hash = {}
+    assert_equal patrons_hash, @dmns.patrons_by_exhibit_interest
+  end
 end
