@@ -34,4 +34,10 @@ class Museum
       recommend_exhibits(patron).any?(exhibit)
     end
   end
+
+  def ticket_lottery_contestants(exhibit)
+    get_patrons_by_exhibit(exhibit).select do |patron|
+      patron.spending_money < exhibit.cost
+    end
+  end
 end
