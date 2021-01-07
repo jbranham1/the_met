@@ -11,6 +11,9 @@ class Museum
     @exhibits << exhibit
   end
 
-  def recommend_exhibits(patron_1)
+  def recommend_exhibits(patron)
+    @exhibits.select do |exhibit|
+      patron.interests.any?(exhibit.name)
+    end
   end
 end
