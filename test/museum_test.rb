@@ -98,8 +98,27 @@ class MuseumTest < Minitest::Test
     dmns.admit(patron_2)
     dmns.admit(patron_3)
 
-    return_string = "Sally or Johnny can be returned here. Fun!"
-    assert_equal return_string, dmns.draw_lottery_winner(dead_sea_scrolls)
+    assert_instance_of Patron, dmns.draw_lottery_winner(dead_sea_scrolls)
     assert_nil dmns.draw_lottery_winner(gems_and_minerals)
+  end
+
+  def test_announce_lottery_winner
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    gems_and_minerals = Exhibit.new({name: "Gems and Minerals", cost: 0})
+    dead_sea_scrolls = Exhibit.new({name: "Dead Sea Scrolls", cost: 10})
+    dmns.add_exhibit(gems_and_minerals)
+    dmns.add_exhibit(dead_sea_scrolls)
+    patron_1 = Patron.new("Bob", 20)
+    patron_1.add_interest("Dead Sea Scrolls")
+    patron_2 = Patron.new("Sally", 5)
+    patron_2.add_interest("Dead Sea Scrolls")
+    patron_3 = Patron.new("Johnny", 5)
+    patron_3.add_interest("Dead Sea Scrolls")
+    dmns.admit(patron_1)
+    dmns.admit(patron_2)
+    dmns.admit(patron_3)
+    dmns.stubs(:draw_lottery_winner).returns("Sally")
+    return_string = "Sally has won the #{dead_sea_scrolls} edhibit lottery"
+    assert_equal return_string, dmns.announce_lottery_winner(dead_sea_scrolls)
   end
 end
