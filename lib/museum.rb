@@ -16,4 +16,7 @@ class Museum
       patron.interests.any?(exhibit.name)
     end
   end
+
+  def patrons_by_exhibit_interest
+  end
 end
